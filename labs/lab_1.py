@@ -1,15 +1,14 @@
-import pathlib
 from typing import Tuple
 
 import click
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 
 import tensorflow as tf
 
 from tensorflow import keras
+
+from . import cli
 
 
 def prepare_dataset(filename: str = "auto-mpg.data") -> pd.DataFrame:
@@ -143,13 +142,13 @@ def plot_history(history):
     plt.show()
 
 
-@click.command()
+@cli.command()
 @click.option('-e', '--epochs', default=1000, type=int)
 @click.option('-v', '--validation', default=0.2, type=float)
 @click.option('-s', '--early-stopping', default=10, type=int)
 @click.option('-l', '--layer', 'layers', multiple=True, default=[64, 64])
 @click.option('--plot/--no-plot', default=False)
-def main(epochs, validation, early_stopping, layers, plot):
+def lab_1(epochs, validation, early_stopping, layers, plot):
     dataset = prepare_dataset()
     train, test = split_dataset(dataset)
     train_labels, test_labels = get_labels(train), get_labels(test)
@@ -166,7 +165,3 @@ def main(epochs, validation, early_stopping, layers, plot):
     if plot:
         plot_history(history)
         plot_predict(model, test_normed, test_labels)
-
-
-if __name__ == '__main__':
-    main()
