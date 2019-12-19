@@ -2,6 +2,7 @@ from . import cli
 from .lab_1 import lab_1
 from .lab_2 import lab_2
 from .lab_3 import lab_3
+from .lab_4 import lab_4
 
 
 if __name__ == '__main__':
